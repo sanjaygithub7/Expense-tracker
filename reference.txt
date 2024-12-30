@@ -1,0 +1,35 @@
+Step-by-Step Development
+Setup and Environment:
+
+Initialize a Node.js project with Express.js.
+Set up MongoDB (local or cloud with MongoDB Atlas).
+Install essential libraries (mongoose, dotenv, jsonwebtoken, etc.).
+
+Database Schema:
+
+Create schemas for User and Expense:
+User: name, email, password.
+Expense: userId, amount, category, date, note.
+
+Basic Routes:
+
+User Routes:
+POST /signup: Register a new user.
+POST /login: Authenticate user and return a token.
+
+Expense Routes:
+POST /expenses: Add a new expense.
+GET /expenses: Fetch all expenses for the logged-in user.
+PUT /expenses/:id : Update an expense.
+DELETE /expenses/:id: Remove an expense.
+
+
+Authentication Middleware:
+Protect expense routes so only logged-in users can access their data.
+
+Validation:
+Validate input data (e.g., amounts must be positive, category should be predefined).
+
+Testing:
+Use Postman to test all endpoints.
+Ensure authentication works as expected.
