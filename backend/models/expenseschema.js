@@ -6,7 +6,7 @@ const expenseSchema = new mongoose.Schema({
         ref: 'User',                  // create relationship between usermodel
         required: true, 
     },
-    amount: {
+     amount: {
         type: Number,
         required: true,
         min: 0,

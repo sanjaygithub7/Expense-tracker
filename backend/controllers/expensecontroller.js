@@ -15,9 +15,8 @@ exports.createexpenses = async (req, res) => {
         });
         
         res.status(201).json({
-            message: 'Expense created successfully'
-            
-        });
+            message: 'Expense created successfully',
+    });
     } catch (error) {
         res.status(500).json({
             message: 'Error creating expense',
@@ -26,10 +25,11 @@ exports.createexpenses = async (req, res) => {
     }
 };
 
-exports.getexpenses = async (req, res) => {
+exports.getSingleexpenses = async (req, res) => {
 
     try{
-        const expenses = await expensemodel.find({userId:req.user.id});//fetching expenses of a particular user from the database
+    const id=req.params.id
+        const expenses = await expensemodel.find({userId:id}).populate({path:'userId',select:'name'});//fetching expenses of a particular user from the database
         res.status(200).json({expenses:expenses});
     }catch(error){
         res.status(500).json({ message: "An error occurred while fetching expenses." });
@@ -39,10 +39,14 @@ exports.getexpenses = async (req, res) => {
 exports.getallexpenses=async(req,res)=>{
     try{
         const expenses=await expensemodel.find({})
-        res.status(200).json({expenses:expenses})
+        res.status(200).json({
+            expenses:expenses
+        })
         
     }catch(error){
-        res.status(500).json({message:"An error occurred while fetching expenses"})
+        res.status(500).json({
+            message:"An error occurred while fetching expenses"
+        })
     }
 }
 
@@ -53,7 +57,8 @@ exports.updateexpenses=async(req,res)=>{
 
         const updateexpense=await expensemodel.findByIdAndUpdate(id,{amount, category, date, note})
         res.status(200).json({
-            message:"Expense updated successfully"
+            message:"Expense updated successfully",
+            updateexpense:updateexpense
         })
         
     }catch(error){
@@ -62,4 +67,21 @@ exports.updateexpenses=async(req,res)=>{
         })
     }
 
+}
+
+exports.deleteexpenses=async(req,res)=>{
+    try{
+        const {id}=req.params.id
+       const deleteexpenses= await expensemodel.findByIdAndDelete(id);
+        res.status(200).json({
+            message: "Expense deleted successfully",
+            deleteexpenses:deleteexpenses
+        });
+    }catch(error){
+        console.log(error)
+        res.status(500).json({
+            messsage:"Error in deleting the expense"
+
+        })
+    }
 }
