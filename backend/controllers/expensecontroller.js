@@ -51,8 +51,9 @@ exports.getallexpenses=async(req,res)=>{
 }
 
 exports.updateexpenses=async(req,res)=>{
+
     try{
-        const {id}=req.params
+        const id=req.params.id
         const {amount, category, date, note}=req.body;
 
         const updateexpense=await expensemodel.findByIdAndUpdate(id,{amount, category, date, note})
@@ -70,8 +71,9 @@ exports.updateexpenses=async(req,res)=>{
 }
 
 exports.deleteexpenses=async(req,res)=>{
+    
     try{
-        const {id}=req.params.id
+        const {id}=req.params
        const deleteexpenses= await expensemodel.findByIdAndDelete(id);
         res.status(200).json({
             message: "Expense deleted successfully",

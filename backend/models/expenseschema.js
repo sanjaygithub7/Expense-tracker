@@ -24,7 +24,7 @@ const expenseSchema = new mongoose.Schema({
     note: {
         type: String,
         trim: true,
-        maxlength: 500, // Optional field for notes
+        maxlength: 500, 
     },
     createdAt: {
         type: Date,
